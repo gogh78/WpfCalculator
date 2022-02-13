@@ -1,0 +1,70 @@
+﻿<Window x:Class="WpfCalculator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfCalculator"
+        xmlns:vm="clr-namespace:WpfCalculator.ViewModels"
+        xmlns:calculation="clr-namespace:WpfCalculator.Models"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="800" Width="400" MinHeight="500" MinWidth="250">
+    <Window.DataContext>
+        <vm:MainWindowViewModel/>
+    </Window.DataContext>
+    <Grid Background="Black" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <TextBlock Name="InputTbl" Grid.Row="0" Margin="5" Padding="5" Foreground="White" FontSize="20"
+                   Text="{Binding Input, Mode=OneWay}" />
+        <TextBlock Name="OutputTbl" Grid.Row="1" Margin="5" Padding="5" Foreground="White" FontSize="20"
+                   Text="{Binding Result, Mode=OneWay}"/>
+        <UniformGrid Grid.Row="2" Rows="6" Columns="4">
+            <Button  Name="ButtonBracketOpen" Content="(" 
+                     Command="{Binding InsertOperationCommand}" 
+                     CommandParameter="{x:Static calculation:Operations.BracketOpen}"/>
+            <Button  Name="ButtonBracketClose" Content=")" 
+                     Command="{Binding InsertOperationCommand}"
+                     CommandParameter="{x:Static calculation:Operations.BracketClouse}"/>
+            <Button  Name="ButtonBracketClear" Content="C" 
+                     Command="{Binding InsertOperationCommand}" 
+                     CommandParameter="{x:Static calculation:Operations.Clear}"/>
+            <Button  Name="ButtonBackspace" Content="⇐"
+                     Command="{Binding InsertOperationCommand}" 
+                     CommandParameter="{x:Static calculation:Operations.Backspace}"/>
+            <Button  Content="%" 
+                     Command="{Binding InsertOperationCommand}" 
+                     CommandParameter="{x:Static calculation:Operations.Percent}"/>
+            <Button  Content="x²"
+                     Command="{Binding InsertOperationCommand}"
+                     CommandParameter="{x:Static calculation:Operations.Pow2}"/>
+            <Button  Content="√" 
+                     Command="{Binding InsertOperationCommand}"
+                     CommandParameter="{x:Static calculation:Operations.Sqrt}"/>
+            <Button  Content="/" />
+            <Button  Content="7" />
+            <Button  Content="8" />
+            <Button  Content="9" />
+            <Button  Content="x" Tag="*" 
+                     CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Tag}"/>
+            <Button  Content="4" />
+            <Button  Content="5" />
+            <Button  Content="6" />
+            <Button  Content="-" />
+            <Button  Content="1" />
+            <Button  Content="2" />
+            <Button  Content="3" />
+            <Button  Content="+" />
+            <Button  Content="+/-"
+                     Command="{Binding InsertOperationCommand}"
+                     CommandParameter="{x:Static calculation:Operations.Negative}"/>
+            <Button  Content="0" />
+            <Button  Content="." CommandParameter="."/>
+            <Button  Content="=" 
+                     Command="{Binding InsertOperationCommand}" 
+                     CommandParameter="{x:Static calculation:Operations.Equal}"/>
+        </UniformGrid>
+    </Grid>
+</Window>
